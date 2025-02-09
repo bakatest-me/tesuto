@@ -1,7 +1,12 @@
 ### Roadmap:
 
+0.1.0
+
 -   [x] Support run test with folder
 -   [ ] Support upload file
+
+0.2.0
+
 -   [ ] Summary testcase report
 -   [ ] Export report
     -   [ ] JSON
