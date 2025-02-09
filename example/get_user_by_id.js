@@ -9,11 +9,24 @@ const setup = {
     },
 };
 
+const testID = "1234567890";
 var testcase = {
     "should return 200": {
         params: {
-            id: "1234567890",
+            id: testID,
         },
         expected: (res) => res.status === 200,
+    },
+    "should return valid name": {
+        params: {
+            id: testID,
+        },
+        expected: (res) => res.body.data.name === "caption america",
+    },
+    "should be hulk": {
+        params: {
+            id: testID,
+        },
+        expected: (res) => res.body.data.name === "hulk",
     },
 };
