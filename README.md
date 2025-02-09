@@ -32,6 +32,8 @@ tesuto run example/
 -   example/query_user.js
 -   example/login.js
 
+_Mock api with mockoon file `example/mockoon.json` for testing example files_
+
 ### Quick Start:
 
 1. Create js file for test script
