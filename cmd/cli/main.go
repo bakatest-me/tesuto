@@ -15,6 +15,12 @@ func main() {
 		Use: "run",
 		Run: CmdRun,
 	}
+	rootCmd.AddCommand(&cobra.Command{
+		Use: "version",
+		Run: func(cmd *cobra.Command, args []string) {
+			fmt.Println("tesuto CLI v0.0.1")
+		},
+	})
 	rootCmd.Flags().BoolP("debug", "d", false, "debug mode")
 
 	if err := rootCmd.Execute(); err != nil {
