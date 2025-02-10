@@ -13,6 +13,22 @@
     -   [ ] JSON
     -   [ ] CSV
 
+### Installation
+
+```bash
+# Download the latest release for your platform
+wget https://github.com/bakatest-me/tesuto/releases/download/v0.0.1/tesuto-darwin.tar.gz
+
+# Extract the archive
+tar -xzvf tesuto-darwin.tar.gz
+
+# Move the tesuto binary to /usr/local/bin
+sudo mv tesuto /usr/local/bin/tesuto
+
+# Verify the installation
+tesuto version
+```
+
 ### Usage:
 
 Run testcase file:
