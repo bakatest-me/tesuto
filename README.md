@@ -4,6 +4,7 @@
 
 -   [x] Support run test with folder
 -   [ ] Support upload file
+-   [ ] Load env to test.js file
 
 0.2.0
 
