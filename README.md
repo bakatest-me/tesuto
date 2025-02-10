@@ -45,6 +45,7 @@ _Mock api with mockoon file `example/mockoon.json` for testing example files_
 2. Setup Object:
 
 ```js
+const baseURL = "http://localhost:8080";
 const setup = {
     url: `${baseURL}/api/v1/users/{id}`,
     method: "GET",
@@ -79,6 +80,29 @@ The testcase object contains the test cases:
 -   "should return 200": The name of the test case.
 -   params: The parameters for the test case.
 -   expected: The expected result of the test case.
+
+Finally file:
+
+```js
+const baseURL = "http://localhost:8080";
+const setup = {
+    url: `${baseURL}/api/v1/users/{id}`,
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer 1234567890",
+    },
+};
+
+var testcase = {
+    "should return 200": {
+        params: {
+            id: "1234567890",
+        },
+        expected: (res) => res.status === 200,
+    },
+};
+```
 
 4. Run testcase:
 
