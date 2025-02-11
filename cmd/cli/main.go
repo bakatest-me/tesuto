@@ -11,12 +11,15 @@ import (
 )
 
 func main() {
-	rootCmd := &cobra.Command{
-		Use: "run",
-		Run: CmdRun,
-	}
+	rootCmd := &cobra.Command{}
 	rootCmd.AddCommand(&cobra.Command{
-		Use: "version",
+		Use:   "run",
+		Short: "test with <file or directory>",
+		Run:   CmdRun,
+	})
+	rootCmd.AddCommand(&cobra.Command{
+		Use:   "version",
+		Short: "show version",
 		Run: func(cmd *cobra.Command, args []string) {
 			fmt.Println("tesuto CLI v0.0.1")
 		},
@@ -30,12 +33,12 @@ func main() {
 }
 
 func CmdRun(cmd *cobra.Command, args []string) {
-	if len(args) < 2 {
+	if len(args) < 1 {
 		cmd.Println("Usage: tesuto run <path to JavaScript file or directory>")
 		return
 	}
 
-	filePath := args[1]
+	filePath := args[0]
 	files, err := util.GetFilePath(filePath)
 	if err != nil {
 		cmd.Println("Error: ", err)
