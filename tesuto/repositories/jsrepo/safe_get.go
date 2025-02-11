@@ -23,7 +23,7 @@ func (m SafeGet) String() string {
 	return m.v.String()
 }
 
-func (m SafeGet) ToBoolean() bool {
+func (m SafeGet) Boolean() bool {
 	if m.v == nil {
 		return false
 	}
@@ -34,7 +34,7 @@ func (m SafeGet) Raw() goja.Value {
 	return m.v
 }
 
-func (m SafeGet) ToObject() saftGetObject {
+func (m SafeGet) Object() saftGetObject {
 	if m.v == nil {
 		return saftGetObject{}
 	}

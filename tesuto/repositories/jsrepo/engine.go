@@ -29,12 +29,12 @@ func (m *engine) SafeGet(key string) SafeGet {
 }
 
 func (m *engine) GetSetup() (models.Setting, error) {
-	setting := m.SafeGet("setup").ToObject()
+	setting := m.SafeGet("setup").Object()
 
 	method := setting.SafeGet("method").String()
 	url := setting.SafeGet("url").String()
 
-	headers := setting.SafeGet("headers").ToObject()
+	headers := setting.SafeGet("headers").Object()
 	headersMap := map[string]string{}
 	for _, key := range headers.Keys() {
 		headersMap[key] = headers.SafeGet(key).String()
@@ -48,20 +48,20 @@ func (m *engine) GetSetup() (models.Setting, error) {
 }
 
 func (m *engine) GetTestCases() ([]models.TestCase, error) {
-	tc := m.SafeGet("testcase").ToObject()
+	tc := m.SafeGet("testcase").Object()
 
 	listTestCase := []models.TestCase{}
 	for _, key := range tc.Keys() {
-		testCase := tc.SafeGet(key).ToObject()
+		testCase := tc.SafeGet(key).Object()
 		expected := testCase.SafeGet("expected").Raw()
 
-		params := testCase.SafeGet("params").ToObject()
+		params := testCase.SafeGet("params").Object()
 		paramsMap := map[string]string{}
 		for _, key := range params.Keys() {
 			paramsMap[key] = params.SafeGet(key).String()
 		}
 
-		query := testCase.SafeGet("query").ToObject()
+		query := testCase.SafeGet("query").Object()
 		queryMap := map[string]string{}
 		for _, key := range query.Keys() {
 			queryMap[key] = query.SafeGet(key).String()
