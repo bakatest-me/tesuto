@@ -79,12 +79,12 @@ func (m *engine) GetTestCases() ([]models.TestCase, error) {
 }
 
 func (m *engine) ExpectedFn(expFn goja.Value, resp map[string]interface{}) (bool, error) {
-	expectedFn, ok := goja.AssertFunction(expFn)
+	fn, ok := goja.AssertFunction(expFn)
 	if !ok {
 		return false, errors.New("error expected function")
 	}
 
-	result, err := expectedFn(goja.Undefined(), m.vm.ToValue(resp))
+	result, err := fn(goja.Undefined(), m.vm.ToValue(resp))
 	if err != nil {
 		return false, err
 	}
