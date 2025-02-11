@@ -7,6 +7,10 @@
 
 ### Upcoming Feature:
 
+-   [ ] Pre-request (setup, testcase)
+-   [ ] Post-response (setup, testcase)
+-   [ ] Build in function
+    -   [ ] faker https://github.com/go-faker/faker
 -   [ ] Support upload file
 -   [ ] Load env to test.js file
 -   [ ] Summary testcase report
@@ -155,12 +159,14 @@ var testcase = {
 tesuto run <testcase_file.js or directory>
 ```
 
-debug
+#### debug
+
 show debug request and response
 `--debug`
 `-d`
 
-curl
+#### curl
+
 generate curl command from testcase
 `--curl`
 `-c`
