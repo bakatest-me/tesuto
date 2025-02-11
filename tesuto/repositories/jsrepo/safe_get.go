@@ -34,33 +34,33 @@ func (m SafeGet) Raw() goja.Value {
 	return m.v
 }
 
-func (m SafeGet) Object() saftGetObject {
+func (m SafeGet) Object() safeGetObject {
 	if m.v == nil {
-		return saftGetObject{}
+		return safeGetObject{}
 	}
-	return saftGetObject{
+	return safeGetObject{
 		v:  m.v.ToObject(m.vm),
 		vm: m.vm,
 	}
 }
 
-type saftGetObject struct {
+type safeGetObject struct {
 	v  *goja.Object
 	vm *goja.Runtime
 }
 
-func (m saftGetObject) SafeGet(key string) SafeGet {
+func (m safeGetObject) SafeGet(key string) SafeGet {
 	return SafeGet{
 		v:  m.v.Get(key),
 		vm: m.vm,
 	}
 }
 
-func (m saftGetObject) Raw() *goja.Object {
+func (m safeGetObject) Raw() *goja.Object {
 	return m.v
 }
 
-func (m saftGetObject) Keys() []string {
+func (m safeGetObject) Keys() []string {
 	if m.v == nil {
 		return []string{}
 	}
