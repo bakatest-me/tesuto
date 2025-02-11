@@ -5,8 +5,8 @@ go 1.23.4
 require (
 	github.com/dop251/goja v0.0.0-20250125213203-5ef83b82af17
 	github.com/fatih/color v1.18.0
-	github.com/go-resty/resty/v2 v2.16.5
 	github.com/spf13/cobra v1.8.1
+	resty.dev/v3 v3.0.0-beta.1
 )
 
 require (
