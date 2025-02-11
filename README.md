@@ -1,13 +1,14 @@
-### Roadmap:
+### Now Feature v0.0.1:
 
-0.1.0
+-   [x] Support run test.js file or with folder
+-   [x] Generate curl command from testcase
+-   [x] Support debug request and response
+-   [x] Support test api with http method
 
--   [x] Support run test with folder
+### Upcoming Feature:
+
 -   [ ] Support upload file
 -   [ ] Load env to test.js file
-
-0.2.0
-
 -   [ ] Summary testcase report
 -   [ ] Export report
     -   [ ] JSON
@@ -18,6 +19,8 @@
 ```bash
 # Download the latest release for your platform
 wget https://github.com/bakatest-me/tesuto/releases/download/v0.0.1/tesuto-darwin.tar.gz
+# or other platform
+# https://github.com/bakatest-me/tesuto/releases
 
 # Extract the archive
 tar -xzvf tesuto-darwin.tar.gz
@@ -56,7 +59,7 @@ _Mock api with mockoon file `example/mockoon.json` for testing example files_
 1. Create js file for test script
 
 ```bash
-	touch testcase/get_user_by_id.js
+touch testcase/get_user_by_id.js
 ```
 
 2. Setup Object:
@@ -145,3 +148,23 @@ var testcase = {
     },
 };
 ```
+
+### Flag options:
+
+```bash
+tesuto run <testcase_file.js or directory>
+```
+
+debug
+show debug request and response
+`--debug`
+`-d`
+
+curl
+generate curl command from testcase
+`--curl`
+`-c`
+
+Reference:
+
+-   HTTP Request [Resty](https://github.com/go-resty/resty) for now use v3
