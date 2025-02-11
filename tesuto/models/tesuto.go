@@ -16,11 +16,12 @@ type Response struct {
 }
 
 type TestCaseResult struct {
-	Name   string   `json:"name"`
-	IsPass bool     `json:"isPass"`
-	Error  error    `json:"error"`
-	Req    Request  `json:"req"`
-	Resp   Response `json:"resp"`
+	Name    string   `json:"name"`
+	IsPass  bool     `json:"isPass"`
+	Error   error    `json:"error"`
+	Req     Request  `json:"req"`
+	Resp    Response `json:"resp"`
+	CurlCmd string   `json:"curlCmd"`
 }
 
 type TestCaseInfo struct {

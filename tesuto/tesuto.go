@@ -5,7 +5,7 @@ import (
 	"tesuto/tesuto/models"
 
 	"github.com/dop251/goja"
-	"github.com/go-resty/resty/v2"
+	"resty.dev/v3"
 )
 
 type JsRepository interface {
@@ -46,14 +46,22 @@ func (m executor) Run(rawJS string) (models.TestCaseInfo, error) {
 		}
 
 		var result interface{}
-		resp, err := r.R().
+		req := r.R().
 			EnableTrace().
 			SetPathParams(v.Params).
 			SetQueryParams(v.Query).
 			SetHeaders(setup.Headers).
 			SetBody(v.Body).
 			SetResult(&result).
-			Execute(setup.Method, setup.URL)
+			EnableGenerateCurlCmd()
+
+		resp, err := req.Execute(setup.Method, setup.URL)
+		if m.cfg.GenerateCurlCmd {
+			tcResult.CurlCmd = req.CurlCmd()
+			testCaseResults = append(testCaseResults, tcResult)
+			continue
+		}
+
 		if err != nil {
 			tcResult.Error = err
 			testCaseResults = append(testCaseResults, tcResult)

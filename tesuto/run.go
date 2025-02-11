@@ -42,7 +42,18 @@ func PrintResult(cfg config.Env, info models.TestCaseInfo) {
 	for k, v := range info.Setup.Headers {
 		color.White("%s: %s\n", color.CyanString(k), color.YellowString(v))
 	}
+
+	breakLine := "-----------------------------"
 	for _, r := range info.Results {
+		if cfg.GenerateCurlCmd {
+			color.White(breakLine)
+			color.White(r.Name)
+			color.White(breakLine)
+			color.White(r.CurlCmd)
+			color.White(breakLine)
+			fmt.Println()
+			continue
+		}
 
 		respTimeFmt := color.WhiteString("[%v]", r.Resp.Time)
 		if r.Error != nil {
@@ -61,30 +72,35 @@ func PrintResult(cfg config.Env, info models.TestCaseInfo) {
 			continue
 		}
 
-		color.White("-----------------------------")
+		color.White(breakLine)
 		color.White("Request:")
-		color.White("-----------------------------")
+		color.White(breakLine)
 		color.White("Method: %s", r.Req.Method)
 		color.White("URL: %s", r.Req.URL)
 		color.White("Headers:")
 		for k, v := range r.Req.Headers {
 			color.White("    %s: %s", k, v)
 		}
+		color.White("Body: \n%s", printBody(r.Req.Body))
 
-		b, _ := json.MarshalIndent(r.Resp.Body, "", "  ")
-		color.White("-----------------------------")
+		color.White(breakLine)
 		color.White("Response:")
-		color.White("-----------------------------")
+		color.White(breakLine)
 		color.White("Status: %d", r.Resp.Status)
 		color.White("Time: %v", r.Resp.Time)
-		body := string(b)
-		if body == "null" {
-			body = ""
-		}
-		color.White("Body: \n%s", body)
-		color.White("-----------------------------")
+		color.White("Body: \n%s", printBody(r.Resp.Body))
+		color.White(breakLine)
 		fmt.Println()
 	}
 
 	fmt.Println()
+}
+
+func printBody(body interface{}) string {
+	b, _ := json.MarshalIndent(body, "", "  ")
+	bodyStr := string(b)
+	if bodyStr == "null" {
+		bodyStr = ""
+	}
+	return bodyStr
 }
