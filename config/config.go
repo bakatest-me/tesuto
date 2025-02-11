@@ -1,5 +1,6 @@
 package config
 
 type Env struct {
-	Debug bool
+	Debug           bool
+	GenerateCurlCmd bool
 }

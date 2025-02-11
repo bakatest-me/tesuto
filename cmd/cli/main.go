@@ -12,11 +12,16 @@ import (
 
 func main() {
 	rootCmd := &cobra.Command{}
-	rootCmd.AddCommand(&cobra.Command{
+
+	runCmd := &cobra.Command{
 		Use:   "run",
-		Short: "test with <file or directory>",
+		Short: "tesuto run <file or directory>",
 		Run:   CmdRun,
-	})
+	}
+	runCmd.PersistentFlags().BoolP("debug", "d", false, "debug mode")
+	runCmd.PersistentFlags().BoolP("curl", "c", false, "generate curl command")
+
+	rootCmd.AddCommand(runCmd)
 	rootCmd.AddCommand(&cobra.Command{
 		Use:   "version",
 		Short: "show version",
@@ -24,7 +29,6 @@ func main() {
 			fmt.Println("tesuto CLI v0.0.1")
 		},
 	})
-	rootCmd.Flags().BoolP("debug", "d", false, "debug mode")
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
@@ -46,8 +50,10 @@ func CmdRun(cmd *cobra.Command, args []string) {
 	}
 
 	isDebug, _ := cmd.Flags().GetBool("debug")
+	isCurl, _ := cmd.Flags().GetBool("curl")
 	cfg := config.Env{
-		Debug: isDebug,
+		Debug:           isDebug,
+		GenerateCurlCmd: isCurl,
 	}
 	tesuto.Run(cfg, files)
 }
