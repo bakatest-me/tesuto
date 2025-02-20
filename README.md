@@ -7,6 +7,7 @@
 
 ### Upcoming Feature:
 
+-   [ ] Vscode extension (make easier to run testcase)
 -   [ ] Pre-request (setup, testcase)
 -   [ ] Post-response (setup, testcase)
 -   [ ] Build in function
