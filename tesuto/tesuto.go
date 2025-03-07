@@ -1,8 +1,11 @@
 package tesuto
 
 import (
+	"strings"
 	"tesuto/config"
+	"tesuto/tesuto/consts"
 	"tesuto/tesuto/models"
+	"time"
 
 	"github.com/dop251/goja"
 	"resty.dev/v3"
@@ -54,13 +57,19 @@ func (m executor) Run(rawJS string) (models.TestCaseInfo, error) {
 			SetBody(v.Body).
 			SetResult(&result).
 			EnableGenerateCurlCmd()
+
 		if m.cfg.GenerateCurlCmd {
-			tcResult.CurlCmd = req.CurlCmd()
+			req = req.SetTimeout(1 * time.Nanosecond)
+		}
+
+		resp, err := req.Execute(setup.Method, setup.URL)
+
+		if m.cfg.GenerateCurlCmd {
+			tcResult.CurlCmd = strings.ReplaceAll(req.CurlCmd(), consts.HeaderAcceptEncoding, "")
 			testCaseResults = append(testCaseResults, tcResult)
 			continue
 		}
 
-		resp, err := req.Execute(setup.Method, setup.URL)
 		if err != nil {
 			tcResult.Error = err
 			testCaseResults = append(testCaseResults, tcResult)
