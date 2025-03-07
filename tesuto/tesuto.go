@@ -54,14 +54,13 @@ func (m executor) Run(rawJS string) (models.TestCaseInfo, error) {
 			SetBody(v.Body).
 			SetResult(&result).
 			EnableGenerateCurlCmd()
-
-		resp, err := req.Execute(setup.Method, setup.URL)
 		if m.cfg.GenerateCurlCmd {
 			tcResult.CurlCmd = req.CurlCmd()
 			testCaseResults = append(testCaseResults, tcResult)
 			continue
 		}
 
+		resp, err := req.Execute(setup.Method, setup.URL)
 		if err != nil {
 			tcResult.Error = err
 			testCaseResults = append(testCaseResults, tcResult)
